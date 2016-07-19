@@ -78,6 +78,24 @@ describe('application logic', () => {
                 entries : List.of('Resevoir Dogs', 'Jackie Brown')
             }));
         });
+
+        it('declares winner when only one entry is left', () => {
+            const state = Map({
+                vote : Map({
+                    pair : List.of('Resevoir Dogs', 'Jackie Brown'),
+                    tally : Map({
+                        'Resevoir Dogs' : 5,
+                        'Jackie Brown' : 2
+                    })
+                }),
+                entries : List()
+            });
+
+            const nextState = next(state);
+            expect(nextState).to.equal(Map({
+                winner : 'Resevoir Dogs'
+            }));
+        });
     });
 
     describe('vote', () => {

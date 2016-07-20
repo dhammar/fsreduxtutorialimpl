@@ -98,51 +98,37 @@ describe('application logic', () => {
         });
     });
 
-    describe('vote', () => {
-        it('takes a tally of votes for the entry', () => {
-            const state = Map({
-                vote: Map({
-                    pair : List.of('Resevoir Dogs', 'Jackie Brown')
-                }),
-                entries : List()
-            });
-            const nextState = vote(state, 'Jackie Brown');
-            expect(nextState).to.equal(Map({
-                vote : Map({
-                    pair : List.of('Resevoir Dogs', 'Jackie Brown'),
-                    tally : Map({
-                        'Jackie Brown' : 1
-                    })
-                }),
-                entries : List()
-                
-            }));
+describe('vote', () => {
+    it('takes a tally of votes for the entry', () => {
+        const state = Map({
+            pair : List.of('Resevoir Dogs', 'Jackie Brown')
         });
-
-        it('adds to existing tally for entry', () => {
-            const state = Map({
-                vote : Map({
-                    pair : List.of('Resevoir Dogs', 'Jackie Brown'),
-
-                    tally : Map({
-                        'Resevoir Dogs' : 3,
-                        'Jackie Brown' : 2
-                    })
-                }),
-                entries : List()
-            });
-
-            const nextState = vote(state, 'Resevoir Dogs');
-            expect(nextState).to.equal( Map({
-                vote : Map({
-                    pair : List.of('Resevoir Dogs', 'Jackie Brown'),
-                    tally : Map({
-                        'Resevoir Dogs' : 4,
-                        'Jackie Brown' : 2
-                    })
-                }),
-                entries : List(),
-            }));
-        });
+        const nextState = vote(state, 'Jackie Brown');
+        expect(nextState).to.equal(Map({
+            pair : List.of('Resevoir Dogs', 'Jackie Brown'),
+            tally : Map({
+                'Jackie Brown' : 1
+            })
+        }));
     });
+
+    it('adds to existing tally for entry', () => {
+        const state = Map({
+            pair : List.of('Resevoir Dogs', 'Jackie Brown'),
+            tally : Map({
+                'Resevoir Dogs' : 3,
+                'Jackie Brown' : 2
+            })
+        });
+
+        const nextState = vote(state, 'Resevoir Dogs');
+        expect(nextState).to.equal( Map({
+            pair : List.of('Resevoir Dogs', 'Jackie Brown'),
+            tally : Map({
+                'Resevoir Dogs' : 4,
+                'Jackie Brown' : 2
+            })
+        }));
+    });
+});
 });

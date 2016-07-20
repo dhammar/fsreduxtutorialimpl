@@ -59,5 +59,18 @@ describe('reducer', () => {
 		}));
 	});
 
+	it('can reduce a collection of actions', () => {
+		const actions = [
+			{type : 'SET_ENTRIES', entries : ['Resevoir Dogs', 'Hateful Eight']}, 
+			{type : 'NEXT'},
+			{type : 'VOTE', entry : 'Hateful Eight'},
+			{type : 'NEXT'}
+		];
+		const finalState = actions.reduce(reducer, Map());
+		expect(finalState).to.equal(fromJS({
+			winner : 'Hateful Eight'
+		}));
+	});
+
 
 });

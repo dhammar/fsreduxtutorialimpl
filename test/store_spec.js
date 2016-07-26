@@ -7,12 +7,13 @@ import makeStore from '../src/store';
 describe('store', () => {
 	it('is configured with the correct reducer', () => {
 		const store = makeStore();
-		expect(store.getState()).to.equal(INITIAL_STATE);
+		expect(store.getState()).to.equal(Map());
 
 		store.dispatch({
-			type : 'SET ENTRIES',
+			type : 'SET_ENTRIES',
 			entries : ['Resevoir Dogs', 'Hateful Eight']
 		});
+		console.log(store.getState());
 		expect(store.getState()).to.equal(fromJS({
 			entries : ['Resevoir Dogs', 'Hateful Eight']
 		}));

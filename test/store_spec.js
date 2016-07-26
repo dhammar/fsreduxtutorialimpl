@@ -13,7 +13,7 @@ describe('store', () => {
 			type : 'SET_ENTRIES',
 			entries : ['Resevoir Dogs', 'Hateful Eight']
 		});
-		console.log(store.getState());
+
 		expect(store.getState()).to.equal(fromJS({
 			entries : ['Resevoir Dogs', 'Hateful Eight']
 		}));

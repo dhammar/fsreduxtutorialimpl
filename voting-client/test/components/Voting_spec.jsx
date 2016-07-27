@@ -35,4 +35,41 @@ describe('Voting', () => {
 
 		expect(votedWith).to.equal('Kill Bill Vol. 2');
 	});
+
+	it('disables buttons after user casts vote', () => {
+		const component = renderIntoDocument(
+			<Voting pair={['Resevoir Dogs', 'Kill Bill Vol. 2']}
+			hasVoted='Resevoir Dogs'/>
+		);
+
+		const buttons = scryRenderedDOMComponentsWithTag(component, 'button');
+		expect(buttons.length).to.equal(2);
+		expect(buttons[0].hasAttribute('disabled')).to.equal(true);
+		expect(buttons[1].hasAttribute('disabled')).to.equal(true);
+	});
+
+	it('adds label to voted upon entry', () => {
+		const component = renderIntoDocument(
+			<Voting pair={['Resevoir Dogs', 'Kill Bill Vol. 2']}
+			hasVoted='Resevoir Dogs'/>
+		);
+		const buttons = scryRenderedDOMComponentsWithTag(component, 'button');
+		expect(buttons[0].textContent).to.contain('Vote Cast');
+	});
+
+	it('renders just the winner when one exists', () => {
+		const component = renderIntoDocument(
+			<Voting winner="Resevoir Dogs" />
+		);
+
+		const buttons = scryRenderedDOMComponentsWithTag(component, 'button');
+		expect(buttons.length).to.equal(0);
+
+		const winner = ReactDOM.findDOMNode(component.refs.winner);
+		expect(winner).to.be.ok;
+		expect(winner.textContent).to.contain('Resevoir Dogs');
+
+	});
+
+
 });

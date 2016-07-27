@@ -27,12 +27,12 @@ describe('Voting', () => {
 		const vote = (entry) => votedWith = entry;
 
 		const component = renderIntoDocument(
-			<Voting pair = {['A', 'B']}
+			<Voting pair = {['Resevoir Dogs', 'Kill Bill Vol. 2']}
 				vote={vote}/>
 		);
 		const buttons = scryRenderedDOMComponentsWithTag(component, 'button');
 		Simulate.click(buttons[1]);
 
-		expect(votedWith).to.equal('B');
+		expect(votedWith).to.equal('Kill Bill Vol. 2');
 	});
 });

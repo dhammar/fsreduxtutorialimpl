@@ -92,5 +92,25 @@ describe('Voting', () => {
   		expect(firstButton.textContent).to.equal('Resevoir Dogs');
 	});
 
+	it('updates DOM when prop changes', () => {
+		const pair = List.of('Resevoir Dogs', 'Jackie Brown');
+		const container = document.createElement('div');
+		let component = ReactDOM.render(
+			<Voting pair={pair} />,
+			container
+		);
+
+		let firstButton = scryRenderedDOMComponentsWithTag(component, 'button')[0];
+		expect(firstButton.textContent).to.equal('Resevoir Dogs');
+
+		const newPair = pair.set(0, 'AAAAAA');
+		component = ReactDOM.render(
+			<Voting pair={newPair} />,
+			container
+		);
+		firstButton = scryRenderedDOMComponentsWithTag(component, 'button')[0];
+		expect(firstButton.textContent).to.equal('AAAAAA');
+	});
+
 
 });
